@@ -7,37 +7,64 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  LOG_LEVEL: info
+  POSTGRES_USER: vapor_username
+  POSTGRES_PASSWORD: vapor_password
+  POSTGRES_DB: vapor_database
+  DATABASE_PORT: 5433
+  DATABASE_HOST: localhost
+
 jobs:
-  test_ubuntu:
+  test-ubuntu:
     runs-on: ubuntu-latest
-    
+    env:
+      DATABASE_HOST: postgres
     services:
       postgres:
-        image: postgres:15-alpine
+        image: postgres:latest
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U postgres -d postgres"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
+          POSTGRES_USER: vapor_username
+          POSTGRES_PASSWORD: vapor_password
+          POSTGRES_DB: vapor_database
+    container: swift:latest
     steps:
-      - name: Check out repository code
+      - name: checkout
         uses: actions/checkout@v3
-
-      - name: Build
-        run: swift build
-
-      - name: Run tests
+      - name: run tests
         run: swift test
-        env:
-          DATABASE_HOST: localhost
-          DATABASE_PORT: 5433
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+
+# jobs:
+#   test_ubuntu:
+#     runs-on: ubuntu-latest
+    
+#     services:
+#       postgres:
+#         image: postgres:15-alpine
+#         env:
+#           POSTGRES_USER: postgres
+#           POSTGRES_PASSWORD: postgres
+#           POSTGRES_DB: postgres
+#         ports:
+#           - 5432:5432
+#         options: >-
+#           --health-cmd "pg_isready -U postgres -d postgres"
+#           --health-interval 10s
+#           --health-timeout 5s
+#           --health-retries 5
+
+#     steps:
+#       - name: Check out repository code
+#         uses: actions/checkout@v3
+
+#       - name: Build
+#         run: swift build
+
+#       - name: Run tests
+#         run: swift test
+#         env:
+#           DATABASE_HOST: localhost
+#           DATABASE_PORT: 5433
+#           POSTGRES_USER: postgres
+#           POSTGRES_PASSWORD: postgres
+#           POSTGRES_DB: postgres
