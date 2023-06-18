@@ -12,7 +12,7 @@ env:
   POSTGRES_USER: vapor_username
   POSTGRES_PASSWORD: vapor_password
   POSTGRES_DB: vapor_database
-  DATABASE_PORT: 5433
+  DATABASE_PORT: 5432
   DATABASE_HOST: localhost
 
 jobs:
