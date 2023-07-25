@@ -48,6 +48,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
         
+      - name: echo directories 2
+        run: |
+          ls -la
+          pwd
+          echo ${{ github.workspace }}
+          
       - name: run tests
         run: swift test
 
