@@ -55,7 +55,7 @@ jobs:
         run: |
           ls -la
           pwd
-          la -la build
+          ls -la .build
           echo ${{ github.workspace }}
           
 # jobs:
