@@ -47,15 +47,17 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
-        
-      - name: run tests
-        run: swift test
+
+      - name: Hash files  
+        run: echo ${{ hashFiles("**/Package.resolved" }}
+      #- name: run tests
+      #  run: swift test
 
       - name: echo directories 2
         run: |
           ls -la
           pwd
-          ls -la .build
+          echo .build/Package.swift
           echo ${{ github.workspace }}
           
 # jobs:
