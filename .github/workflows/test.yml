@@ -49,7 +49,7 @@ jobs:
             ${{ runner.os }}-spm-
 
       - name: Hash files  
-        run: echo ${{ hashFiles("**/Package.resolved" }}
+        run: echo ${{ hashFiles("**/Package.resolved") }}
       #- name: run tests
       #  run: swift test
 
