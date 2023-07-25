@@ -38,9 +38,13 @@ jobs:
       - name: echo directories
         run: |
           ls -la
+          pwd
+          echo ${{ github.workspace }}
+          ls ${{ github.workspace }}
         
       - uses: actions/cache@v3
         with:
+          path: ${{ github.workspace }}
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
