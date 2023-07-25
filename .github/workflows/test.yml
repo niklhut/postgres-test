@@ -22,8 +22,8 @@ jobs:
     
     env:
       DATABASE_HOST: postgres
+      
     services:
-
       postgres:
         image: postgres:latest
         env:
@@ -38,11 +38,9 @@ jobs:
       - name: echo directories
         run: |
           ls -la
-          ls -la .build
         
       - uses: actions/cache@v3
         with:
-          path: .build
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
